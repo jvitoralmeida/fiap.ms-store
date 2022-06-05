@@ -69,7 +69,7 @@ spec:
   selector:
     matchLabels:
         app: fiap-ms-user
-  replicas: 2
+  replicas: 10
   strategy:
     type: RollingUpdate
   template:
