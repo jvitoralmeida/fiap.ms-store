@@ -53,8 +53,8 @@ jobs:
           cluster_name: 'fiap-cluster-kubernetes'
           location: 'us-east1-b'
       
-      - id: 'kubectl apply'
-        run: 'kubectl apply -f git-deployment.yml'
+      - name: 'kubectl apply'
+          run: 'kubectl apply -f git-deployment.yml'
             
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
