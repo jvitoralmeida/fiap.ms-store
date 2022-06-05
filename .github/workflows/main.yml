@@ -54,9 +54,7 @@ jobs:
           location: 'us-east1-b'
       
       - id: 'kubectl apply'
-        with:
-          args: |
-            kubectl apply -f git-deployment.yml
+        run: 'kubectl apply -f git-deployment.yml'
             
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
