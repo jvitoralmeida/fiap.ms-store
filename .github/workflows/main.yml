@@ -52,8 +52,6 @@ jobs:
         with:
           cluster_name: 'fiap-cluster-kubernetes'
           location: 'us-east1-b'
-          args: |
-            kubectl apply -f git-deployment.yml
       
       - id: 'kubectl apply'
         with:
