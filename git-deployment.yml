@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db-deployment
+  name: ms-user-db-deployment
 spec:
   replicas: 1
   selector:
