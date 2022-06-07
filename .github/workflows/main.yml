@@ -35,7 +35,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
         with: 
-          image: jvitoralmeida/fiap.ms-user
+          image: jvitoralmeida/fiap.ms-store
           tag: latest
           registry: docker.io
           dockerfile: ./src/main/docker/Dockerfile.native
@@ -63,7 +63,7 @@ jobs:
           SLACK_CHANNEL: joao-teste
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Hey, novo deploy do ms-user'
+          SLACK_MESSAGE: 'Hey, novo deploy do ms-store'
           SLACK_TITLE: 'Deploy do FIAP-MS.USER'
           SLACK_USERNAME: gitBot
       
