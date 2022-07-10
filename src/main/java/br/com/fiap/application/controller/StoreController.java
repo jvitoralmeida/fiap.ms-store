@@ -44,7 +44,7 @@ public class StoreController {
     @POST
     public Response create(Store store) {
         repository.persist(store);
-        return Response.created(URI.create("/store/" + store)).build();
+        return Response.created(URI.create("/store/" + store.id)).build();
     }
 
     @PUT
