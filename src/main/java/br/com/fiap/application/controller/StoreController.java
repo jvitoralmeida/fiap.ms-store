@@ -3,6 +3,9 @@ package br.com.fiap.application.controller;
 import java.net.URI;
 import java.util.List;
 
+
+import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.fiap.domain.repository.StoreRepository;
 import org.bson.types.ObjectId;
 
 import br.com.fiap.domain.model.Store;
@@ -22,43 +26,47 @@ import br.com.fiap.domain.model.Store;
 @Produces(MediaType.APPLICATION_JSON)
 public class StoreController {
 
+    @Inject
+    StoreRepository repository;
+
     @GET
     public List<Store> listAll() {
-        return Store.listAll();
+        return repository.listAll();
     }
 
     @GET
     @Path("/{id}")
     @RolesAllowed({"user", "admin"})
     public Store findById(String id) {
-        return Store.findById(new ObjectId(id));
+        return repository.findById(new ObjectId(id));
     }
 
     @POST
     public Response create(Store store) {
-        store.persist();
-        return Response.created(URI.create("/store/" + store.id)).build();
+        repository.persist(store);
+        return Response.created(URI.create("/store/" + store)).build();
     }
 
     @PUT
     @Path("/{id}")
-    public void update(String id, Store store) {
-        store.update();
+    @RolesAllowed({"user", "admin"})
+    public void update(Store store) {
+        repository.update(store);
     }
 
     @DELETE
     @Path("/{id}")
     public void delete(String id) {
-        var storeOptional = Store.findByIdOptional(id);
+        var storeOptional = repository.findByIdOptional(new ObjectId(id));
 
         var store = storeOptional.orElseThrow(() -> new RuntimeException("Store not found"));
-        store.delete();
+        repository.delete(store);
     }
 
     @GET
     @Path("/search/{name}")
     public List<Store> search(String name) {
-        return Store.findByName(name);
+        return repository.findByName(name);
     }
 
     @GET
