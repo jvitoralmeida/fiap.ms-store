@@ -68,10 +68,4 @@ public class StoreController {
     public List<Store> search(String name) {
         return repository.findByName(name);
     }
-
-    @GET
-    @Path("/count")
-    public Long count() {
-        return Store.count();
-    }
 }
