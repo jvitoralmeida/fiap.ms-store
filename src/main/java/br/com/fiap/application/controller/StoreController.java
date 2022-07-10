@@ -29,6 +29,7 @@ public class StoreController {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"user", "admin"})
     public Store findById(String id) {
         return Store.findById(new ObjectId(id));
     }
